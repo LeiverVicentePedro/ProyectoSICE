@@ -1,0 +1,64 @@
+
+/*Esta hoja es para la plantilla de toda la pagina.*/
+/*panel superior cabecera*/
+#top {
+    /*color: white;*/
+    background-color: #003300;
+    padding: 5px;
+    margin: 0px 0px 10px 0px;
+    border: white 5px outset;
+}
+
+/*panel del menu*/
+#left {
+    float: left;
+    padding: 5px;
+    width: 250px;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border:solid 1px #000000;
+    
+}
+
+#content{
+    border: solid 1px #000000;
+    background-color: #dddddd;
+    float:right;
+    width: 80%;
+}
+/*titulo del menu*/
+#cabecera {
+    display:inline;
+    height: 400px;
+}
+#tituloMenu{
+    font-size:14px;
+    font-weight: bold;
+    background-color: #003300;
+    color: white;
+    
+}
+
+#datosPrincipales{
+    color: white;
+    text-align:center;
+    margin-top: 20px;
+}
+
+#tituloSistema{
+    font-size:25px;
+}
+
+#tituloCliente{
+    font-size: 18px;
+}
+
+#divLogoCliente{
+   float:right;
+}
+
+
+#divLogoPantalla{
+    float:left;
+}

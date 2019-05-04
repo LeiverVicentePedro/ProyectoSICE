@@ -1,0 +1,122 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 24/03/2018, 10:16:11 PM
+    Author     : vplei
+*/
+
+html{
+    margin: 0;
+    padding: 0;
+}
+/*Cuerpo del index*/
+body{
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+/*parte donde van los logos*/
+.cabecera{
+    width: 40%;
+    margin-left: 60px;
+    float: left;
+    
+}
+/*div que contiene el logo del sistema*/
+.logoSistema{
+    width: 200px;
+    height: 120px;
+}
+/*Parte dondeiran las notificaciones*/
+.relleno{
+
+    float: right;
+    margin-top: 20px;
+    margin-right: 80px;
+    
+    border-radius: 20px; /*propiedad CSS3*/
+    -ms-border-radius: 20px; /*para IE 8*/
+    -moz-border-radius:20px; /*Firefox*/
+    -webkit-border-radius: 20px; /*WebKit y Safari*/
+    -khtml-border-radius: 20px;
+    box-shadow: 0 0 25px #999999;
+
+}
+/*La imagen de la notificacion*/
+.imagenLateral{
+     width: 630px;
+    height: 370px;
+    border-radius: 20px;
+}
+
+/*div general que contiene el formulario de acceso*/
+.loginBox{
+    float: right;
+    margin-right: 15;
+    margin-top: 90px;
+    margin-right: 40px;
+    width: 380px;
+    height: 470px;
+    background: rgba(4, 61, 33,.70);
+    box-shadow: 0px 0px 40px #009900 , 0px 0px 80px #ffffff;
+    
+}
+/*rectangulo interno de color blanco que rodea el formulario*/
+.grid{
+    border:solid #ffffff;
+    width: 100%;
+    height: 380px;
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    
+}
+/*Div que contiene el formulario*/
+.panelGrid{
+    margin-top: 20px;
+    width: 90%;
+    margin-bottom: 20px;
+}
+/*div que tiene el titulo del formulario de acceso*/
+.div-titulo{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 90%;
+    padding: 10px;
+}
+/*etiqueta del titulo del formulario*/
+.titulo{
+    color: white;
+    font-family: sans-serif;  
+}
+/*campos de texto del contenedor*/
+.texto{
+    color: white;
+    font-family: sans-serif;
+    margin-top: 5px;
+     
+}
+/*Cajas de texto para el acceso al menu*/
+.caja{
+    background-color: rgba(0,62,255,.2);
+    /*border-color: #ffffff;*/
+    border-bottom-color: green;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+    font-size: 16px;
+    color:white;
+}
+/*boton de acceso*/
+.boton{
+    margin: auto;
+    margin-top: 20px;
+    width: 90%;
+    padding: 10px;
+}
