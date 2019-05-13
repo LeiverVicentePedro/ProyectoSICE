@@ -7,7 +7,6 @@ package sice.usuario.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import sice.conexion.Conexion;
 import sice.usuario.modelo.Usuarios;
 
@@ -27,7 +26,7 @@ public class UsuarioDAO extends Conexion{
         ResultSet resultSet;        
         try{
            Conectar();
-           String usuariosCon = "CALL USUARIOSCON(?,?,?,?,?,?,?,?,?)";
+           String usuariosCon = "CALL USUARIOSCON(?,?,?,?,?,?,?,?,?)";//Para hacer la llamada aL STORE
 
            preparedStatement = getConexion().prepareStatement(usuariosCon);
            
@@ -56,8 +55,9 @@ public class UsuarioDAO extends Conexion{
            usuarioCon.setCorreo(resultSet.getString("Correo"));
            usuarioCon.setClave(resultSet.getString("Clave"));
            usuarioCon.setContrasenia(resultSet.getString("Contrasenia"));
+           usuarioCon.setRolID(resultSet.getInt("RolID"));
            usuarioCon.setEstatus(resultSet.getString("Estatus"));
-           System.out.println("Estatus en dao "+resultSet.getString("Estatus"));
+          
           }
         }catch(Exception ex){
            ex.printStackTrace();

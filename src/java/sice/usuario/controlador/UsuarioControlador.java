@@ -30,9 +30,9 @@ public class UsuarioControlador implements Serializable{
             usuario = usuarioServicio.consulta(1, usuario);
 
             if(usuario.getEstatus().equalsIgnoreCase("A")){
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuario);
                 redireccion = "principal.xhtml";
             }else{
-                System.out.println("Entro aca");
                  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Acceso Denegado","Clave no Valida."));
             }
 
@@ -42,20 +42,6 @@ public class UsuarioControlador implements Serializable{
         }
     }
     
-    public void exite() {
-        try {
-            FacesContext contexto = FacesContext.getCurrentInstance();
-            Usuarios usuarioVive = (Usuarios) contexto.getExternalContext().getSessionMap().get("usuario");
-            
-            if (usuarioVive.getClave()== null) {
-                contexto.getExternalContext().redirect("index.xhtml");  
-            }else{
-               usuario = usuarioVive; 
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
     
     
     

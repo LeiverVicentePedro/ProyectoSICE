@@ -62,8 +62,8 @@ body{
     margin-right: 40px;
     width: 380px;
     height: 470px;
-    background: rgba(4, 61, 33,.70);
-    box-shadow: 0px 0px 40px #009900 , 0px 0px 80px #ffffff;
+    background: rgba(156, 154, 154,.4);
+    box-shadow: 0px 0px 30px #999999 , 0px 0px 80px #ffffff;
     
 }
 /*rectangulo interno de color blanco que rodea el formulario*/
@@ -86,13 +86,17 @@ body{
 .div-titulo{
     margin-top: 10px;
     margin-bottom: 20px;
-    width: 90%;
+    width: 100%;
     padding: 10px;
+    text-align: center;
 }
 /*etiqueta del titulo del formulario*/
 .titulo{
     color: white;
-    font-family: sans-serif;  
+    font-family: sans-serif;
+    font-size: 20px;
+
+    
 }
 /*campos de texto del contenedor*/
 .texto{
@@ -103,15 +107,15 @@ body{
 }
 /*Cajas de texto para el acceso al menu*/
 .caja{
-    background-color: rgba(0,62,255,.2);
+    background-color: rgb(255,255,255);
     /*border-color: #ffffff;*/
-    border-bottom-color: green;
+    border-bottom-color: white;
     border-top: none;
     border-left: none;
     border-right: none;
     text-align: center;
     font-size: 16px;
-    color:white;
+    color:black;
 }
 /*boton de acceso*/
 .boton{

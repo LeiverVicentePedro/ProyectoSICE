@@ -5,13 +5,14 @@
  */
 package sice.usuario.modelo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author vplei
  */
-public class Usuarios {
+public class Usuarios implements Serializable{
     private int usuarioID;
     private String nombre;
     private String primerApellido;
