@@ -8,50 +8,64 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet library="css" name="bootstrap.css"/>
         <h:outputStylesheet library="css" name="default.css"/>
         <h:outputStylesheet library="css" name="cssLayout.css"/>
-        <h:outputScript library="js" name="bootstrap.js"/> 
-        <title>Principal</title>
-         <f:event type="preRenderView" listener="#{menuAplicacionControlador.exite()}"/>
+        <title>SICE</title>
+        <f:event type="preRenderView" listener="#{accesoControlador.exite()}"/>
     </h:head>
 
     <h:body>
         <f:event type="preRenderView" listener="#{menuAplicacionControlador.crearMenu()}"/>
-         <p:growl id="growl">
+         <p:growl id="growl" showDetail="true" sticky="true">
               <p:autoUpdate/>
          </p:growl>
-        <div id="top" class="col-md-12">
+        <div id="top" class="ui-g-12">
             <ui:insert name="top">
                 <div id="cabecera">
-                    <div id="divLogoPantalla" class="col-md-2">
+                    <div id="divLogoPantalla" class="ui-g-2">
                         <p:graphicImage class="logoPlantilla" library="img" name="LogoSICE.png" width="150px" height="100px"/>
                     </div>
-                    <div  id="datosPrincipales" class="col-md-8" width="150px">
+                    <div  id="datosPrincipales" class="ui-g-8" width="150px">
                         <p:outputLabel id="tituloSistema" value="Sistema Integral de Control de Evaluaciones"/>
                         <br/>
                         <p:outputLabel id="tituloCliente" value="Centro Escolar Num 25"/>
                     </div>
-                    <div id="divLogoCliente" class="col-md-2">
+                    <div id="divLogoCliente" class="ui-g-2">
                         <p:graphicImage class="logoCliente" library="img" name="LogoSICE.png" width="150px" height="100px"/>
                     </div>
+                    <div class="ui-g-12">
+                    <div class="ui-g-2">
+                        <p:outputLabel value="Usuario: "/>
+                        <p:outputLabel value="#{accesoControlador.usuarioVive.nombreCompleto}"/>
+                    </div>
+                    <div class="ui-g-8"></div>
+                    <div class="ui-g-2">
+                        <h:form>
+                            <p:commandLink value="Cerrar Sesion" actionListener="#{menuAplicacionControlador.cerrarSesion()}" action="/index.xhtml?faces-redirect=true"/>
+                        </h:form>
+                        
+                    </div>
+                    </div>
+                    
                 </div>
                 
                 
             </ui:insert>
         </div>
-        <div class ="col-md-12">
+        <div class ="ui-g-12">
             <div id="left">
                 <div id="tituloMenu">
                 <p:outputLabel value="Men&uacute;"/>
                 </div>
                 <h:form>
                    <p:panelMenu model="#{menuAplicacionControlador.modeloMenuPrincipal}">
+                      
+                      
                    </p:panelMenu>
                 </h:form>
             </div>
             <div id="content">
-                <ui:insert name="content">Content</ui:insert>
+                <ui:insert name="content"></ui:insert>
             </div>
         </div>
 

@@ -11,7 +11,7 @@
         <h:outputScript library="js" name="bootstrap.js"/>
     </h:head>
     <h:body>
-          <p:growl id="growl" showDetail="true" autoUpdate="true"/>
+          <p:growl id="growl" showDetail="true"/>
         <div class="cabecera">
             <p:graphicImage library="img" name="LogoSICE.png" class="logoSistema"/>   
         </div>
@@ -27,13 +27,13 @@
                         
                     <h:panelGrid columns="1" class="container-fluid panelGrid">
                         <p:outputLabel value="Usuario: " class="form-text texto"/>
-                        <p:inputText maxlength="15" class="form-control caja" value="${usuarioControlador.usuario.clave}"/>
+                        <p:inputText maxlength="15" class="form-control caja" value="${accesoControlador.usuario.clave}"/>
                         <p:outputLabel value="Clave: " class="form-text texto" />
-                        <p:password maxlength="8" class="form-control caja" value="${usuarioControlador.usuario.contrasenia}"/>
+                        <p:password maxlength="8" class="form-control caja" value="${accesoControlador.usuario.contrasenia}"/>
 
                     </h:panelGrid>
                     <div class="boton">
-                        <p:commandButton  value="Ingresar" action="${usuarioControlador.getRedireccion()}" actionListener="${usuarioControlador.acceso()}" class="btn btn-success  form-control"/>
+                        <p:commandButton  value="Ingresar" action="${accesoControlador.getRedireccion()}" actionListener="${accesoControlador.acceso()}" class="btn btn-success  form-control" update="growl"/>
                     </div>
                 </h:form>
             </div>

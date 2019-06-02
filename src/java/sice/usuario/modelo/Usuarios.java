@@ -13,7 +13,8 @@ import java.util.Date;
  * @author vplei
  */
 public class Usuarios implements Serializable{
-    private int usuarioID;
+    
+    private String usuarioID;
     private String nombre;
     private String primerApellido;
     private String segundoApellido;
@@ -28,11 +29,22 @@ public class Usuarios implements Serializable{
     private int rolID;
     private String estatus;
 
-    public int getUsuarioID() {
+    
+    /*SECCION DE AUDITORIA*/
+   private int audUsuarioID;
+   private String claveUsuario;
+   private String NumeroIP;
+   private String Programa;
+
+    
+    
+    
+    
+    public String getUsuarioID() {
         return usuarioID;
     }
 
-    public void setUsuarioID(int usuarioID) {
+    public void setUsuarioID(String usuarioID) {
         this.usuarioID = usuarioID;
     }
 
@@ -138,6 +150,38 @@ public class Usuarios implements Serializable{
 
     public void setEstatus(String estatus) {
         this.estatus = estatus;
+    }
+
+    public String getClaveUsuario() {
+        return claveUsuario;
+    }
+
+    public void setClaveUsuario(String claveUsuario) {
+        this.claveUsuario = claveUsuario;
+    }
+
+    public String getNumeroIP() {
+        return NumeroIP;
+    }
+
+    public void setNumeroIP(String NumeroIP) {
+        this.NumeroIP = NumeroIP;
+    }
+
+    public String getPrograma() {
+        return Programa;
+    }
+
+    public void setPrograma(String Programa) {
+        this.Programa = Programa;
+    }
+
+    public int getAudUsuarioID() {
+        return audUsuarioID;
+    }
+
+    public void setAudUsuarioID(int audUsuarioID) {
+        this.audUsuarioID = audUsuarioID;
     }
     
     

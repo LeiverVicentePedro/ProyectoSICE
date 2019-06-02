@@ -20,7 +20,7 @@ public class Conexion {
           return conexion;
     }
     
-     public void Conectar() throws Exception{
+     public void conectar() throws Exception{
         try{
            System.out.println("======= SE CREA CONEXION =========");
            context  = new InitialContext();
@@ -34,7 +34,7 @@ public class Conexion {
         }
     }
      
-     public void Cerrar() throws Exception{
+     public void cerrar() throws Exception{
         try{
         if(conexion != null){
             if(conexion.isClosed()==false){

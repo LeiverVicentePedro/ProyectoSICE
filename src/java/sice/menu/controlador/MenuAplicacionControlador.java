@@ -1,6 +1,8 @@
 package sice.menu.controlador;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
@@ -11,7 +13,6 @@ import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSubMenu;
 import org.primefaces.model.menu.MenuModel;
-
 import sice.menu.modelo.ElementoMenu;
 import sice.menu.servicio.ElementoMenuServicio;
 import sice.usuario.modelo.Usuarios;
@@ -24,9 +25,10 @@ import sice.usuario.modelo.Usuarios;
 @SessionScoped
 public class MenuAplicacionControlador implements Serializable{
     
+    Usuarios usuario = new Usuarios();
     private MenuModel modeloMenuPrincipal = new DefaultMenuModel();;
-    private List<ElementoMenu> listaMenu;
-    
+    private List<ElementoMenu> listaMenu = new ArrayList<ElementoMenu>();
+    private String redirige = "";
     ElementoMenuServicio elementoMenuServicio = new ElementoMenuServicio();
      
     public void crearMenu(){
@@ -38,7 +40,6 @@ public class MenuAplicacionControlador implements Serializable{
                         if(menu.getTipoMenu().equalsIgnoreCase("s") && menu.getSubmenuID() == 0){
                             DefaultSubMenu menuPrincipal = new DefaultSubMenu(menu.getDescripcion());
                             menuPrincipal.setIcon(menu.getIcono());
-                            System.out.println("submenu "+menu.getDescripcion());
                             
                             for(ElementoMenu subMenu : listaMenu){
                                 if(subMenu.getSubmenuID() == menu.getElementoMenuID() && subMenu.getTipoMenu().equalsIgnoreCase("s")){
@@ -48,48 +49,40 @@ public class MenuAplicacionControlador implements Serializable{
                                        if(itemMenu.getSubmenuID() == subMenu.getElementoMenuID() && itemMenu.getTipoMenu().equalsIgnoreCase("i")){
                                            DefaultMenuItem item = new DefaultMenuItem(itemMenu.getDescripcion());
                                            item.setIcon(itemMenu.getIcono());
+                                           item.setOutcome(itemMenu.getVista());
+                                         
                                            submenu.addElement(item);
                                            
                                        }
                                    }
-                                    System.out.println("item "+subMenu.getDescripcion());
                                     menuPrincipal.addElement(submenu);
+                                   
                                 }
                             }
-                            modeloMenuPrincipal.addElement(menuPrincipal);
-                        }
+                            
+                            modeloMenuPrincipal.addElement(menuPrincipal);  
+                        } 
                     }
                     
                    
 
         }catch(Exception ex){
-            System.out.println("Error en MenuBEAN -> crearMenu: "+ex);
             ex.printStackTrace();
         }
     }
     
     
-    public void exite() {
-        try {
-            FacesContext contexto = FacesContext.getCurrentInstance();
-            Usuarios usuarioVive = (Usuarios) contexto.getExternalContext().getSessionMap().get("usuario");
-            System.out.println("Existe "+usuarioVive.getClave()+" "+usuarioVive.getRolID());
-            if (usuarioVive.getClave()== null) {
-                contexto.getExternalContext().redirect("index.xhtml");  
-            }else{
-               usuarioVive = usuarioVive; 
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
+   
     
     
     
     
     
-    public void cerrarSesion(){
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    public void cerrarSesion() throws IOException{
+         FacesContext contexto = FacesContext.getCurrentInstance();
+        contexto.getExternalContext().invalidateSession();
+        
+        
     }
     
     
@@ -100,4 +93,13 @@ public class MenuAplicacionControlador implements Serializable{
     public void setModeloMenuPrincipal(MenuModel modeloMenuPrincipal) {
         this.modeloMenuPrincipal = modeloMenuPrincipal;
     }
+
+    public String getRedirige() {
+        return redirige;
+    }
+
+    public void setRedirige(String redirige) {
+        this.redirige = redirige;
+    }
+    
 }

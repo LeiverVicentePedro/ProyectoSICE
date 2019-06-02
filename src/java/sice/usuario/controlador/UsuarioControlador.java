@@ -6,10 +6,14 @@
 package sice.usuario.controlador;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.PrimeFaces;
+import sice.geneal.modelo.MensajeSalida;
 import sice.usuario.modelo.Usuarios;
 import sice.usuario.servicio.UsuarioServicio;
 
@@ -22,27 +26,46 @@ import sice.usuario.servicio.UsuarioServicio;
 public class UsuarioControlador implements Serializable{
     Usuarios usuario = new Usuarios();
     UsuarioServicio usuarioServicio = new UsuarioServicio();
-    private String redireccion;
+
+   
+    
+   
     
     
-    public void  acceso(){
+    public void transaccion(int accion){
+        MensajeSalida mensaje = new MensajeSalida();
+        FacesMessage message;
+        Usuarios audUsuario = (Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        usuario.setAudUsuarioID(Integer.parseInt(audUsuario.getUsuarioID()));
+        usuario.setClaveUsuario(audUsuario.getClave());
+        usuario.setNumeroIP("127.0.0.1");
+        usuario.setPrograma("Alta.usuario");
         try{
-            usuario = usuarioServicio.consulta(1, usuario);
-
-            if(usuario.getEstatus().equalsIgnoreCase("A")){
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuario);
-                redireccion = "principal.xhtml";
-            }else{
-                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Acceso Denegado","Clave no Valida."));
-            }
-
+        mensaje = usuarioServicio.transaccion(usuario, accion);
+        if(mensaje.getNumErr()==0){
+          message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito", mensaje.getErrMen()+" "+mensaje.getConsecutivo());
+           //PrimeFaces.current().resetInputs("form:panel");
+          usuario.setUsuarioID(String.valueOf(mensaje.getConsecutivo()));
+         
+        }else{
+            message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: "+mensaje.getNumErr(), mensaje.getErrMen());
+        }
+        PrimeFaces.current().dialog().showMessageDynamic(message);
         }catch(Exception ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Acceso Denegado","Clave o Contraseña Incorrecta"));
             ex.printStackTrace();
         }
     }
     
-    
+    public List<Usuarios> lista(String nombre){
+        List<Usuarios> lista = new ArrayList<Usuarios>();
+        usuario.setUsuarioID(nombre);
+        try{
+            lista = usuarioServicio.listaUsuario(usuario,1);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return lista;
+    }
     
     
     public Usuarios getUsuario() {
@@ -53,13 +76,7 @@ public class UsuarioControlador implements Serializable{
         this.usuario = usuario;
     }
 
-    public String getRedireccion() {
-        return redireccion;
-    }
 
-    public void setRedireccion(String redireccion) {
-        this.redireccion = redireccion;
-    }
     
     
     

@@ -28,7 +28,7 @@ public class MenuAplicacionDAO extends Conexion{
         ResultSet resultSet;
         List<ElementoMenu> listaMenu = new ArrayList<ElementoMenu>();
         try{
-            Conectar();
+            conectar();
             String consulta = "CALL MENUCON(?,?);";
             callableStatement = getConexion().prepareCall(consulta);
             callableStatement.setInt("Par_RolID",rolID);
@@ -36,7 +36,6 @@ public class MenuAplicacionDAO extends Conexion{
             
             resultSet = callableStatement.executeQuery();
              while(resultSet.next()){
-                 System.out.println("Descripcion "+resultSet.getString("NombreMenu"));
                 ElementoMenu elementoMenu = new ElementoMenu();
                 elementoMenu.setElementoMenuID(resultSet.getInt("ElementoMenuID"));
                  elementoMenu.setDescripcion(resultSet.getString("NombreMenu"));
@@ -50,7 +49,7 @@ public class MenuAplicacionDAO extends Conexion{
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{
-            Cerrar();
+            cerrar();
         }
        return listaMenu;
     }
