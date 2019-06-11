@@ -7,7 +7,7 @@ package sice.usuario.servicio;
 
 import java.util.ArrayList;
 import java.util.List;
-import sice.geneal.modelo.MensajeSalida;
+import sice.general.modelo.MensajeSalida;
 import sice.usuario.dao.UsuarioDAO;
 import sice.usuario.modelo.Usuarios;
 

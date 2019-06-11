@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import sice.conexion.Conexion;
-import sice.geneal.modelo.MensajeSalida;
+import sice.general.modelo.MensajeSalida;
 import sice.usuario.modelo.Usuarios;
 
 /**

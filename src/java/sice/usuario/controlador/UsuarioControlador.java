@@ -14,7 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.PrimeFaces;
-import sice.geneal.modelo.MensajeSalida;
+import sice.general.modelo.MensajeSalida;
 import sice.herramientas.Herramientas;
 import sice.usuario.modelo.Usuarios;
 import sice.usuario.servicio.UsuarioServicio;

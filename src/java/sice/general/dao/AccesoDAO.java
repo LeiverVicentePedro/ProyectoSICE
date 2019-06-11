@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sice.geneal.dao;
+package sice.general.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -11,8 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import sice.conexion.Conexion;
-import sice.geneal.modelo.Acceso;
-import sice.geneal.modelo.MensajeSalida;
+import sice.general.modelo.Acceso;
+import sice.general.modelo.MensajeSalida;
 import sice.usuario.modelo.Usuarios;
 
 /**

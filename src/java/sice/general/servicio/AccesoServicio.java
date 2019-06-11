@@ -5,9 +5,9 @@
  */
 package sice.general.servicio;
 
-import sice.geneal.dao.AccesoDAO;
-import sice.geneal.modelo.Acceso;
-import sice.geneal.modelo.MensajeSalida;
+import sice.general.dao.AccesoDAO;
+import sice.general.modelo.Acceso;
+import sice.general.modelo.MensajeSalida;
 import sice.usuario.modelo.Usuarios;
 
 

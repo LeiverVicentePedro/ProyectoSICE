@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sice.geneal.controlador;
+package sice.general.controlador;
 
 import java.io.Serializable;
 import java.net.InetAddress;
@@ -13,8 +13,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.PrimeFaces;
-import sice.geneal.modelo.Acceso;
-import sice.geneal.modelo.MensajeSalida;
+import sice.general.modelo.Acceso;
+import sice.general.modelo.MensajeSalida;
 import sice.general.servicio.AccesoServicio;
 import sice.usuario.modelo.Usuarios;
 
