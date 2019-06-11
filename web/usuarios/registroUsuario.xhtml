@@ -5,150 +5,158 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
-    <body>
-
+ 
         <ui:composition template="./../plantilla/plantilla.xhtml">
             <ui:define name="content">
-                <h:form>
+                <h:form id="formPrincipal">
                     <p:panel id="panel" header="Registro de Usuario">
-                         <p:separator style="visibility: hidden;"/>          
-                        <p:fieldset legend="Datos Personales">
+                        <p:separator style="visibility: hidden;"/>          
+                        <p:fieldset legend="Datos Personales" id="fielsetPrin">
                             <!--Primer Fila -->
-                            <div id="tabla" class="ui-g-12">
+                            <div id="tabla" class="ui-g">
                                 <div class="ui-g-12">
-                                     <div class="ui-g-1">
+                                    <div class="ui-g-1">
                                         <p:outputLabel for="usuarioID"  class="label" value="N&uacute;mero: "/>
-                                     </div>
+                                    </div>
                                     <div class="ui-g-4" style="text-align: left;">
                                         <p:autoComplete id="usuarioID" value="#{usuarioControlador.usuario.usuarioID}" completeMethod="#{usuarioControlador.lista}"
-                                                        var="usuario" itemLabel="#{usuario.usuarioID}" itemValue="#{usuario}" forceSelection="true"
+                                                        var="listaUsuario"  itemValue="#{listaUsuario.usuarioID}" itemLabel="#{listaUsuario.usuarioID}"
                                                         size="10" minQueryLength="3">
                                             <p:column>
-                                                <h:outputText value="#{usuario.usuarioID}" />
+                                                <h:outputText value="#{listaUsuario.usuarioID}" />
                                             </p:column>
                                             <p:column>
-                                                <h:outputText value="#{usuario.nombreCompleto}" />
+                                                <h:outputText value="#{listaUsuario.nombreCompleto}"/>
                                             </p:column>
+                                            <f:ajax event="blur" listener="#{usuarioControlador.consulta}"  render="datosPersonales datosUsuario"/> 
                                         </p:autoComplete>
                                      </div>
                                     <div class="ui-g-7"></div>
-
                                 </div>
-
                                 <!--Termina Primer Fila  -->
+                                <h:panelGroup id="datosPersonales">
                                 <!--Inicia Segunda Fila -->
-                                <div class="ui-g-12">
-                                    <div class="ui-g-1">
-                                    <p:outputLabel for="nombre"  class="label" value="Nombre: "/>
+                                    <div  class="ui-g-12">
+                                        <div class="ui-g-1">
+                                            <p:outputLabel for="nombre"  class="label" value="Nombre: "/>
+                                        </div>
+                                        <div class="ui-g-4">
+                                            <p:inputText id="nombre" value="#{usuarioControlador.usuario.nombre}" size="50" converter="toUpperCaseConverter">
+                                                <f:ajax event="blur" render="@this"/>
+                                            </p:inputText>
+                                        </div>
+                                        <div class="ui-g-2"></div>
+                                        <div class="ui-g-1">
+                                            <p:outputLabel for="apPaterno"  class="label" value="Primer Apellido: "/>
+                                        </div>
+                                        <div class="ui-g-4">
+                                            <p:inputText id="apPaterno" value="#{usuarioControlador.usuario.primerApellido}"  size="50" converter="toUpperCaseConverter">
+                                                <f:ajax event="blur" render="@this"/>
+                                            </p:inputText>
+                                        </div>
                                     </div>
-                                    <div class="ui-g-4">
-                                        <p:inputText id="nombre" value="#{usuarioControlador.usuario.nombre}" size="50"/>
+                                    <!--Termina Segunda fila -->
+                                    <!-- Inicia Tercera fila -->
+                                    <div class="ui-g-12" >
+                                        <div class="ui-g-1">
+                                            <p:outputLabel for="apMaterno"  class="label" value="Segundo Apellido: "/>
+                                        </div>
+                                        <div class="ui-g-4">
+                                            <p:inputText id="apMaterno" value="#{usuarioControlador.usuario.segundoApellido}" size="50" converter="toUpperCaseConverter">
+                                                <f:ajax event="blur" render="@this"/>
+                                            </p:inputText>
+                                        </div>
+                                        <div class="ui-g-2"></div>
+                                        <div class="ui-g-1">
+                                            <p:outputLabel for="sexo"  class="label" value="Genero: "/>
+                                        </div>
+                                        <div class="ui-g-4">
+                                            <p:selectOneMenu id="sexo" value="#{usuarioControlador.usuario.sexo}" autoWidth="true">
+                                                <f:selectItem itemLabel="Seleccione" itemValue="" />
+                                                <f:selectItem itemLabel="Masculino" itemValue="H" />
+                                                <f:selectItem itemLabel="Femenino" itemValue="M" />
+                                            </p:selectOneMenu>
+                                        </div>
                                     </div>
-                                    <div class="ui-g-2"></div>
-                                    <div class="ui-g-1">
-                                        <p:outputLabel for="apPaterno"  class="label" value="Primer Apellido: "/>
+
+                                    <div class="ui-g-12" >
+                                        <div class="ui-g-1">
+                                            <p:outputLabel for="fechaNacimiento"  class="label" value="Fecha Nacimiento: "/>
+                                        </div>
+                                        <div class="ui-g-4">
+                                            <p:datePicker id="fechaNacimiento" value="#{usuarioControlador.usuario.fechaNacimiento}" pattern="yyyy-MM-dd" showIcon="true" size="15"/>
+                                        </div>
+                                        <div class="ui-g-2"></div>
+                                        <div class="ui-g-1">
+                                            <p:outputLabel for="numControl"  class="label" value="Num. Control: "/>
+                                        </div>
+                                        <div class="ui-g-4">
+                                            <p:inputText id="numControl" value="#{usuarioControlador.usuario.numControl}" size="20" converter="toUpperCaseConverter">
+                                                <f:ajax event="blur" render="@this"/>
+                                            </p:inputText>
+                                        </div>
                                     </div>
-                                    <div class="ui-g-4">
-                                        <p:inputText id="apPaterno" value="#{usuarioControlador.usuario.primerApellido}"  size="50"/>
-                                    </div>
-                                </div>
-                                <!--Termina Segunda fila -->
-                                <!-- Inicia Tercera fila -->
-                                <div class="ui-g-12" >
-                                    <div class="ui-g-1">
-                                        <p:outputLabel for="apMaterno"  class="label" value="Segundo Apellido: "/>
-                                    </div>
-                                    <div class="ui-g-4">
-                                        <p:inputText id="apMaterno" value="#{usuarioControlador.usuario.segundoApellido}" size="50"/>
-                                    </div>
-                                    <div class="ui-g-2"></div>
-                                     <div class="ui-g-1">
-                                        <p:outputLabel for="sexo"  class="label" value="Genero: "/>
-                                     </div>
-                                     <div class="ui-g-4">
-                                         <p:selectOneMenu id="sexo" value="#{usuarioControlador.usuario.sexo}" autoWidth="true">
-                                             <f:selectItem itemLabel="Seleccione" itemValue="" />
-                                             <f:selectItem itemLabel="Masculino" itemValue="H" />
-                                             <f:selectItem itemLabel="Femenino" itemValue="M" />
-                                        </p:selectOneMenu>
-                                     </div>
-                                </div>
-                                
-                                <div class="ui-g-12" >
-                                    <div class="ui-g-1">
-                                        <p:outputLabel for="fechaNacimiento"  class="label" value="Fecha Nacimiento: "/>
-                                    </div>
-                                    <div class="ui-g-4">
-                                        <p:datePicker id="fechaNacimiento" value="#{usuarioControlador.usuario.fechaNacimiento}" pattern="yyyy-MM-dd" showIcon="true" size="15"/>
-                                    </div>
-                                    <div class="ui-g-2"></div>
-                                     <div class="ui-g-1">
-                                        <p:outputLabel for="numControl"  class="label" value="Num. Control: "/>
-                                     </div>
-                                     <div class="ui-g-4">
-                                         <p:inputText id="numControl" value="#{usuarioControlador.usuario.numControl}" size="20"/>
-                                     </div>
-                                </div>
-                                
-                                <div class="ui-g-12" >
-                                    <div class="ui-g-1">
-                                        <p:outputLabel for="correo"  class="label" value="Correo Electronico: "/>
-                                    </div>
-                                    <div class="ui-g-4">
-                                        <p:inputText id="correo" value="#{usuarioControlador.usuario.correo}" size="30"/>
-                                    </div>
-                                    <div class="ui-g-2"></div>
-                                     <div class="ui-g-6">
-                                     </div>
-                                </div>
+
+                                    <div class="ui-g-12" >
+                                        <div class="ui-g-1">
+                                            <p:outputLabel for="correo"  class="label" value="Correo Electronico: "/>
+                                        </div>
+                                        <div class="ui-g-4">
+                                            <p:inputText id="correo" value="#{usuarioControlador.usuario.correo}" size="30"/>
+                                        </div>
+                                        <div class="ui-g-2"></div>
+                                        <div class="ui-g-6"></div>
+                                    </div>                       
+                                </h:panelGroup>                        
                             </div>
                             <!-- Fin Terera fila -->
-                            <!-- -->
                         </p:fieldset>
                         <p:separator style="visibility: hidden;"/>
+                        <!--Seccion de Ususario -->
+                         <h:panelGroup id="datosUsuario">
                         <p:fieldset legend="Datos Usuario">
-                            <div class="ui-g-12">
+                            <div class="ui-g">
                                 <div class="ui-g-1">
-                                     <p:outputLabel for="clave"  class="label" value="Clave Acceso: "/>
+                                    <p:outputLabel for="clave"  class="label" value="Clave Acceso: "/>
                                 </div>
                                 <div class="ui-g-3">
                                     <p:inputText id="clave" value="#{usuarioControlador.usuario.clave}" size="30"/>
                                 </div>
                                 <div class="ui-g-1">
-                                     <p:outputLabel for="contrasenia"  class="label" value="Contraseña: "/>
+                                    <p:outputLabel for="contrasenia"  class="label" value="Contraseña: "/>
                                 </div>
                                 <div class="ui-g-3">
                                     <p:password id="contrasenia" value="#{usuarioControlador.usuario.contrasenia}" size="30"/>
                                 </div>
                                 <div class="ui-g-1">
-                                     <p:outputLabel for="rolID"  class="label" value="Nivel Acceso: "/>
+                                    <p:outputLabel for="rolID"  class="label" value="Nivel Acceso: "/>
                                 </div>
                                 <div class="ui-g-3">
                                     <p:selectOneMenu id="rolID" value="#{usuarioControlador.usuario.rolID}" autoWidth="true">
-                                             <f:selectItem itemLabel="Seleccione" itemValue="" />
-                                             <f:selectItem itemLabel="Ponente" itemValue="1" />
-                                             <f:selectItem itemLabel="Participante" itemValue="2" />
-                                        </p:selectOneMenu>
+                                        <f:selectItem itemLabel="Seleccione" itemValue="" />
+                                        <f:selectItem itemLabel="ADMINISTRADOR" itemValue="1" />
+                                        <f:selectItem itemLabel="PONENTE" itemValue="2" />
+                                        <f:selectItem itemLabel="PARTICIPANTE" itemValue="3" />
+                                    </p:selectOneMenu>
                                 </div>
                             </div>
                         </p:fieldset>
+                        
                         <p:separator style="visibility: hidden;"/>
                         <div class="ui-g-12">
                             <div class="ui-g-10"></div>
                             <div class="ui-g-1">
-                                <p:commandButton action="#{usuarioControlador.transaccion(1)}" label="Agregar" value="Agregar"/>
+                                <p:commandButton id="agregar" action="#{usuarioControlador.transaccion(1)}" label="Agregar" value="Agregar" disabled="#{usuarioControlador.agregar}"/>
                             </div>
                             <div class="ui-g-1">
-                                <p:commandButton action="#{usuarioControlador.transaccion(2)}" label="Modificar" value="Modificar"/>
+                                <p:commandButton id="modificar" action="#{usuarioControlador.transaccion(2)}" label="Modificar" value="Modificar" disabled="#{usuarioControlador.modificar}"/>
                             </div>
                         </div>
                         <p:separator style="visibility: hidden;"/>
+                        </h:panelGroup>
                     </p:panel>
-                    
                 </h:form>
             </ui:define>
         </ui:composition>
 
-    </body>
 </html>

@@ -27,13 +27,13 @@
                         
                     <h:panelGrid columns="1" class="container-fluid panelGrid">
                         <p:outputLabel value="Usuario: " class="form-text texto"/>
-                        <p:inputText maxlength="15" class="form-control caja" value="${accesoControlador.usuario.clave}"/>
+                        <p:inputText maxlength="15" class="form-control caja" value="${accesoControlador.clave}"/>
                         <p:outputLabel value="Clave: " class="form-text texto" />
-                        <p:password maxlength="8" class="form-control caja" value="${accesoControlador.usuario.contrasenia}"/>
+                        <p:password maxlength="8" class="form-control caja" value="${accesoControlador.pass}"/>
 
                     </h:panelGrid>
                     <div class="boton">
-                        <p:commandButton  value="Ingresar" action="${accesoControlador.getRedireccion()}" actionListener="${accesoControlador.acceso()}" class="btn btn-success  form-control" update="growl"/>
+                        <p:commandButton  value="Ingresar" action="${accesoControlador.getRedireccion()}" actionListener="${accesoControlador.accesoSistema()}" class="btn btn-success  form-control" update="growl"/>
                     </div>
                 </h:form>
             </div>

@@ -1,17 +1,45 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-
-    <body>
-
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+   
         <ui:composition template="./plantilla/plantilla.xhtml">
 
             <ui:define name="content">
-                Bienvenido al principal de tu pagina
+                <p:dialog header="Cambio de Contraseña" widgetVar="cambioPass" modal="true" closable="false" resizable="false" width="800">
+                    <p:fieldset legend="Nueva Contraseña">
+                            <h:form id="formPrincipal">
+                                <div  class="ui-g">
+                                    <div class="ui-g-2">
+                                    <p:outputLabel for="contrasenia"  class="label" value="Contraseña: "/>
+                                    </div>
+                                    <div class="ui-g-3">
+                                        <p:password id="contrasenia" value="#{accesoControlador.usuario.contrasenia}" size="20"/>
+                                    </div>
+                                    <div class="ui-g-2"></div>
+                                    <div class="ui-g-2">
+                                        <p:outputLabel for="confirmacion"  class="label" value="confirmaci&oacute;n: "/>
+                                    </div>
+                                    <div class="ui-g-3">
+                                        <p:password id="confirmacion" value="#{accesoControlador.usuario.confirmacion}"  size="20"/>
+                                    </div>
+                                    <div class="ui-g-12">   
+                                        <p:outputLabel value="Al Realizar el Cambio de Contraseña se Cerrar&aacute; la Sesión y Sera Redireccionado a la Pantalla de Acceso." style="color: red;"/>   
+                                    </div>
+                                    <div class="ui-g-5"></div>
+                                    <div class="ui-g-2" style="text-align: center;">
+                                        <p:commandButton  id="cambiar" actionListener="#{accesoControlador.cambiaContrasenia()}" label="Cambiar" value="Cambiar"/>
+                                    </div>
+                                    <div class="ui-g-5"></div>
+                                </div>
+                            </h:form>
+                    </p:fieldset>
+                </p:dialog> 
             </ui:define>
-
+            
         </ui:composition>
-
-    </body>
+}
 </html>

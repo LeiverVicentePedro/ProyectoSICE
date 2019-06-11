@@ -7,10 +7,7 @@ package sice.usuario.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLType;
 import java.util.ArrayList;
 import java.util.List;
 import sice.conexion.Conexion;
@@ -28,23 +25,22 @@ public class UsuarioDAO extends Conexion{
         super();
     }
     
-    public Usuarios ConsultaAcceso(Usuarios usuario, int numConsulta) throws Exception{
+    public Usuarios ConsultaUsuario(Usuarios usuario, int numConsulta) throws Exception{
         Usuarios usuarioCon = new Usuarios();
-       
-                
+        
         try{
            conectar();
            String consulta = "CALL USUARIOSCON(?,?,?,?,?,?,?,?,?)";//Para hacer la llamada aL STORE
 
            callableStatement = getConexion().prepareCall(consulta);
            
-           callableStatement.setInt("Par_UsuarioID", 0);
+           callableStatement.setInt("Par_UsuarioID",Integer.parseInt(usuario.getUsuarioID()));
            callableStatement.setString("Par_Nombre","");
            callableStatement.setString("Par_PrimerApellido", "");
            callableStatement.setString("Par_SegundoApellido", "");
            callableStatement.setString("Par_NumControl", "");
-           callableStatement.setString("Par_Clave", usuario.getClave());
-           callableStatement.setString("Par_Contrasenia", usuario.getContrasenia());
+           callableStatement.setString("Par_Clave", "");
+           callableStatement.setString("Par_Contrasenia", "");
            callableStatement.setString("Par_Estatus", "");
            callableStatement.setInt("Par_Consulta", numConsulta);
 
@@ -89,6 +85,60 @@ public class UsuarioDAO extends Conexion{
                                          + "?,?);";
             getConexion().setAutoCommit(false);
             callableStatement = getConexion().prepareCall(alta);
+            callableStatement.setString("Par_Nombre",usuario.getNombre());
+            callableStatement.setString("Par_PrimerApellido",usuario.getPrimerApellido());
+            callableStatement.setString("Par_SegundoApellido",usuario.getSegundoApellido());
+            callableStatement.setString("Par_Sexo",usuario.getSexo());
+            callableStatement.setDate("Par_FechaNacimiento",new java.sql.Date(usuario.getFechaNacimiento().getTime()));
+            callableStatement.setString("Par_NumControl",usuario.getNumControl());
+            callableStatement.setString("Par_Correo",usuario.getCorreo());
+            callableStatement.setString("Par_Clave",usuario.getClave());
+            callableStatement.setString("Par_Contrasenia",usuario.getContrasenia());
+            callableStatement.setInt("Par_RolID",usuario.getRolID());
+            callableStatement.setString("Par_Salida","S");
+            callableStatement.registerOutParameter("Par_NumErr",java.sql.Types.INTEGER);
+            callableStatement.registerOutParameter("Par_ErrMen",java.sql.Types.VARCHAR);
+            callableStatement.setInt("Aud_UsuarioID",usuario.getAudUsuarioID());
+            callableStatement.setString("Aud_ClaveUsuario",usuario.getClaveUsuario());
+            callableStatement.setString("Aud_NumeroIP",usuario.getNumeroIP());
+            callableStatement.setString("Aud_Programa",usuario.getPrograma());
+
+             resultSet = callableStatement.executeQuery();
+             getConexion().commit();
+             while(resultSet.next()){
+             mensaje.setNumErr(resultSet.getInt("NumErr"));
+             mensaje.setErrMen(resultSet.getString("ErrMen"));
+             mensaje.setControl(resultSet.getString("Control"));
+             mensaje.setConsecutivo(resultSet.getInt("Consecutivo"));
+             }
+             
+             
+             
+        }catch(Exception ex){
+            ex.printStackTrace();
+            getConexion().rollback();
+            getConexion().setAutoCommit(true);
+        }finally{
+             
+            cerrar();
+            
+        }
+        return mensaje;
+    }
+    
+    public MensajeSalida modificaUsuario(Usuarios usuario) throws Exception{
+        MensajeSalida mensaje= new MensajeSalida();
+        Connection conexion = null;
+        try{
+            conectar();
+
+            String alta = "CALL USUARIOSMOD(?,?,?,?,?,"
+                                         + "?,?,?,?,?,"
+                                         + "?,?,?,?,?,"
+                                         + "?,?,?);";
+            getConexion().setAutoCommit(false);
+            callableStatement = getConexion().prepareCall(alta);
+            callableStatement.setInt("Par_UsuarioID",Integer.parseInt(usuario.getUsuarioID()));
             callableStatement.setString("Par_Nombre",usuario.getNombre());
             callableStatement.setString("Par_PrimerApellido",usuario.getPrimerApellido());
             callableStatement.setString("Par_SegundoApellido",usuario.getSegundoApellido());

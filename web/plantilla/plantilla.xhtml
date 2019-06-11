@@ -10,6 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet library="css" name="default.css"/>
         <h:outputStylesheet library="css" name="cssLayout.css"/>
+        
         <title>SICE</title>
         <f:event type="preRenderView" listener="#{accesoControlador.exite()}"/>
     </h:head>
@@ -36,12 +37,12 @@
                     <div class="ui-g-12">
                     <div class="ui-g-2">
                         <p:outputLabel value="Usuario: "/>
-                        <p:outputLabel value="#{accesoControlador.usuarioVive.nombreCompleto}"/>
+                        <p:outputLabel value="#{accesoControlador.nombreCompleto}"/>
                     </div>
                     <div class="ui-g-8"></div>
                     <div class="ui-g-2">
                         <h:form>
-                            <p:commandLink value="Cerrar Sesion" actionListener="#{menuAplicacionControlador.cerrarSesion()}" action="/index.xhtml?faces-redirect=true"/>
+                            <p:commandLink value="Cerrar Sesion" actionListener="#{menuAplicacionControlador.cerrarSesion()}"/>
                         </h:form>
                         
                     </div>
@@ -68,8 +69,6 @@
                 <ui:insert name="content"></ui:insert>
             </div>
         </div>
-
-
     </h:body>
 
 </html>

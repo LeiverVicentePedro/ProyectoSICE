@@ -8,11 +8,13 @@ package sice.usuario.modelo;
 import java.io.Serializable;
 import java.util.Date;
 
+
 /**
  *
  * @author vplei
  */
 public class Usuarios implements Serializable{
+
     
     private String usuarioID;
     private String nombre;
@@ -20,12 +22,14 @@ public class Usuarios implements Serializable{
     private String segundoApellido;
     private String sexo;
     private Date fechaNacimiento;
+    private Date primerAcceso;
     private String numControl;
     private String nombreCompleto;
     private int establecimientoID;
     private String correo;
     private String clave;
     private String contrasenia;
+    private String confirmacion;
     private int rolID;
     private String estatus;
 
@@ -88,6 +92,14 @@ public class Usuarios implements Serializable{
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    public Date getPrimerAcceso() {
+        return primerAcceso;
+    }
+
+    public void setPrimerAcceso(Date primerAcceso) {
+        this.primerAcceso = primerAcceso;
+    }
+
     public String getNumControl() {
         return numControl;
     }
@@ -136,6 +148,14 @@ public class Usuarios implements Serializable{
         this.contrasenia = contrasenia;
     }
 
+    public String getConfirmacion() {
+        return confirmacion;
+    }
+
+    public void setConfirmacion(String confirmacion) {
+        this.confirmacion = confirmacion;
+    }
+    
     public int getRolID() {
         return rolID;
     }
@@ -184,6 +204,29 @@ public class Usuarios implements Serializable{
         this.audUsuarioID = audUsuarioID;
     }
     
+    public void resetea(){
+        usuarioID = null;
+        nombre  = null;
+        primerApellido= null;
+        segundoApellido= null;
+        sexo= null;
+        fechaNacimiento= null;
+        primerAcceso= null;
+        numControl= null;
+        nombreCompleto= null;
+        establecimientoID= 0;
+        correo= null;
+        clave= null;
+        contrasenia= null;
+        confirmacion= null;
+        rolID= 0;
+        estatus= null;
+
     
-    
+    /*SECCION DE AUDITORIA*/
+        audUsuarioID= 0;
+        claveUsuario= null;
+        NumeroIP= null;
+        Programa= null;
+    }
 }

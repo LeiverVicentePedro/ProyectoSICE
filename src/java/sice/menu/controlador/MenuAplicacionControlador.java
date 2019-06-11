@@ -25,7 +25,6 @@ import sice.usuario.modelo.Usuarios;
 @SessionScoped
 public class MenuAplicacionControlador implements Serializable{
     
-    Usuarios usuario = new Usuarios();
     private MenuModel modeloMenuPrincipal = new DefaultMenuModel();;
     private List<ElementoMenu> listaMenu = new ArrayList<ElementoMenu>();
     private String redirige = "";
@@ -70,17 +69,11 @@ public class MenuAplicacionControlador implements Serializable{
             ex.printStackTrace();
         }
     }
-    
-    
-   
-    
-    
-    
-    
-    
+    //invalida la seccion del usuario
     public void cerrarSesion() throws IOException{
          FacesContext contexto = FacesContext.getCurrentInstance();
         contexto.getExternalContext().invalidateSession();
+        contexto.getExternalContext().redirect(contexto.getExternalContext().getRequestContextPath());
         
         
     }

@@ -26,12 +26,19 @@ public class UsuarioServicio {
     public static interface usuario_num_Lis{
         int lisprincipal =1;
     }
+    
+    public static interface usuario_num_Con{
+        int conPrincipal =2;
+    }
     public MensajeSalida transaccion(Usuarios usuario,int numTransaccion){
         MensajeSalida mensaje = new MensajeSalida(); 
         try{
             switch(numTransaccion){
                 case usuario_num_Tran.registro:
                     mensaje = usuarioDAO.altaUsuario(usuario);
+                break;
+                 case usuario_num_Tran.modificacion:
+                    mensaje = usuarioDAO.modificaUsuario(usuario);
                 break;
             }
         }catch(Exception ex){
@@ -44,8 +51,9 @@ public class UsuarioServicio {
         Usuarios usuarioCon = new Usuarios();
         try{
             switch(consulta){
-                case 1:
-                    usuarioCon = usuarioDAO.ConsultaAcceso(usuario, consulta);
+                case usuario_num_Con.conPrincipal:
+                    System.out.println("entro aca");
+                    usuarioCon = usuarioDAO.ConsultaUsuario(usuario, consulta);
                 break;
             }
         }catch(Exception ex){
@@ -55,7 +63,7 @@ public class UsuarioServicio {
         return usuarioCon;
     }
     
-    public List<Usuarios> listaUsuario(Usuarios usuario,int numLista){
+    public List<Usuarios> listaUsuario(int numLista,Usuarios usuario){
         List<Usuarios> lista = new ArrayList<Usuarios>();
         try{
             switch(numLista){
