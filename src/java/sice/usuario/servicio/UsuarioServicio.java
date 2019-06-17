@@ -52,7 +52,6 @@ public class UsuarioServicio {
         try{
             switch(consulta){
                 case usuario_num_Con.conPrincipal:
-                    System.out.println("entro aca");
                     usuarioCon = usuarioDAO.ConsultaUsuario(usuario, consulta);
                 break;
             }

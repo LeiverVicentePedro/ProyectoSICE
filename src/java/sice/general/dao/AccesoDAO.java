@@ -5,11 +5,8 @@
  */
 package sice.general.dao;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import sice.conexion.Conexion;
 import sice.general.modelo.Acceso;
 import sice.general.modelo.MensajeSalida;
@@ -20,8 +17,7 @@ import sice.usuario.modelo.Usuarios;
  * @author vplei
  */
 public class AccesoDAO extends Conexion{
-    CallableStatement callableStatement;
-    ResultSet resultSet;
+
     public AccesoDAO() {
         super();
     }

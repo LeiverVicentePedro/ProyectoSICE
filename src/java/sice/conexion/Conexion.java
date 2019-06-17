@@ -1,6 +1,8 @@
 package sice.conexion;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import javax.annotation.Resource;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -15,6 +17,9 @@ public class Conexion {
     
     private Connection conexion;
     private InitialContext context;
+    
+    public CallableStatement callableStatement;
+    public ResultSet resultSet;
     
     public Connection getConexion(){
           return conexion;

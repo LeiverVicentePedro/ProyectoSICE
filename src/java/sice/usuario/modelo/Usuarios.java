@@ -7,13 +7,14 @@ package sice.usuario.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import sice.herramientas.AuditoriasBean;
 
 
 /**
  *
  * @author vplei
  */
-public class Usuarios implements Serializable{
+public class Usuarios extends AuditoriasBean implements Serializable{
 
     
     private String usuarioID;
@@ -32,17 +33,7 @@ public class Usuarios implements Serializable{
     private String confirmacion;
     private int rolID;
     private String estatus;
-
-    
-    /*SECCION DE AUDITORIA*/
-   private int audUsuarioID;
-   private String claveUsuario;
-   private String NumeroIP;
-   private String Programa;
-
-    
-    
-    
+  
     
     public String getUsuarioID() {
         return usuarioID;
@@ -172,37 +163,6 @@ public class Usuarios implements Serializable{
         this.estatus = estatus;
     }
 
-    public String getClaveUsuario() {
-        return claveUsuario;
-    }
-
-    public void setClaveUsuario(String claveUsuario) {
-        this.claveUsuario = claveUsuario;
-    }
-
-    public String getNumeroIP() {
-        return NumeroIP;
-    }
-
-    public void setNumeroIP(String NumeroIP) {
-        this.NumeroIP = NumeroIP;
-    }
-
-    public String getPrograma() {
-        return Programa;
-    }
-
-    public void setPrograma(String Programa) {
-        this.Programa = Programa;
-    }
-
-    public int getAudUsuarioID() {
-        return audUsuarioID;
-    }
-
-    public void setAudUsuarioID(int audUsuarioID) {
-        this.audUsuarioID = audUsuarioID;
-    }
     
     public void resetea(){
         usuarioID = null;
@@ -221,12 +181,5 @@ public class Usuarios implements Serializable{
         confirmacion= null;
         rolID= 0;
         estatus= null;
-
-    
-    /*SECCION DE AUDITORIA*/
-        audUsuarioID= 0;
-        claveUsuario= null;
-        NumeroIP= null;
-        Programa= null;
     }
 }

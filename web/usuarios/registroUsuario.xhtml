@@ -9,7 +9,7 @@
         <ui:composition template="./../plantilla/plantilla.xhtml">
             <ui:define name="content">
                 <h:form id="formPrincipal">
-                    <p:panel id="panel" header="Registro de Usuario">
+                    <p:panel id="panel" header="Usuarios">
                         <p:separator style="visibility: hidden;"/>          
                         <p:fieldset legend="Datos Personales" id="fielsetPrin">
                             <!--Primer Fila -->
@@ -68,7 +68,7 @@
                                         </div>
                                         <div class="ui-g-2"></div>
                                         <div class="ui-g-1">
-                                            <p:outputLabel for="sexo"  class="label" value="Genero: "/>
+                                            <p:outputLabel for="sexo"  class="label" value="G&eacute;nero: "/>
                                         </div>
                                         <div class="ui-g-4">
                                             <p:selectOneMenu id="sexo" value="#{usuarioControlador.usuario.sexo}" autoWidth="true">
@@ -88,7 +88,7 @@
                                         </div>
                                         <div class="ui-g-2"></div>
                                         <div class="ui-g-1">
-                                            <p:outputLabel for="numControl"  class="label" value="Num. Control: "/>
+                                            <p:outputLabel for="numControl"  class="label" value="N&uacute;m. Control: "/>
                                         </div>
                                         <div class="ui-g-4">
                                             <p:inputText id="numControl" value="#{usuarioControlador.usuario.numControl}" size="20" converter="toUpperCaseConverter">
@@ -144,12 +144,12 @@
                         
                         <p:separator style="visibility: hidden;"/>
                         <div class="ui-g-12">
-                            <div class="ui-g-10"></div>
-                            <div class="ui-g-1">
-                                <p:commandButton id="agregar" action="#{usuarioControlador.transaccion(1)}" label="Agregar" value="Agregar" disabled="#{usuarioControlador.agregar}"/>
+                            <div class="ui-g-8"></div>
+                            <div class="ui-g-2" style="text-align: right">
+                                <p:commandButton id="agregar"  icon="fas fa-plus" action="#{usuarioControlador.transaccion(1)}" label="Agregar" value="Agregar" disabled="#{usuarioControlador.agregar}"/>
                             </div>
-                            <div class="ui-g-1">
-                                <p:commandButton id="modificar" action="#{usuarioControlador.transaccion(2)}" label="Modificar" value="Modificar" disabled="#{usuarioControlador.modificar}"/>
+                            <div class="ui-g-2" style="text-align: center">
+                                <p:commandButton id="modificar" icon="fas fa-edit" action="#{usuarioControlador.transaccion(2)}" label="Modificar" value="Modificar" disabled="#{usuarioControlador.modificar}"/>
                             </div>
                         </div>
                         <p:separator style="visibility: hidden;"/>

@@ -5,8 +5,6 @@
  */
 package sice.menu.dao;
 
-import java.sql.CallableStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import sice.conexion.Conexion;
@@ -23,8 +21,7 @@ public class MenuAplicacionDAO extends Conexion{
     }
     
     public List<ElementoMenu> menu(int rolID, int numConsulta) throws Exception{
-        CallableStatement callableStatement;
-        ResultSet resultSet;
+        
         List<ElementoMenu> listaMenu = new ArrayList<ElementoMenu>();
         try{
             conectar();

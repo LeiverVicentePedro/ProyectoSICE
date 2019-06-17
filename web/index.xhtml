@@ -7,6 +7,8 @@
         <title>SICE - Inicio</title>
         <h:outputStylesheet library="css" name="bootstrap.css"/>
         <h:outputStylesheet library="css" name="index.css"/>
+        <h:outputStylesheet library="css" name="all.css"/>
+        <h:outputScript library="js" name="all.js"/>
         <h:outputScript library="js" name="jquery-3.3.1.min.js"/>
         <h:outputScript library="js" name="bootstrap.js"/>
     </h:head>
@@ -33,7 +35,7 @@
 
                     </h:panelGrid>
                     <div class="boton">
-                        <p:commandButton  value="Ingresar" action="${accesoControlador.getRedireccion()}" actionListener="${accesoControlador.accesoSistema()}" class="btn btn-success  form-control" update="growl"/>
+                        <p:commandButton value="Ingresar" action="${accesoControlador.getRedireccion()}" actionListener="${accesoControlador.accesoSistema()}" class="btn btn-success  form-control" update="growl"/>
                     </div>
                 </h:form>
             </div>

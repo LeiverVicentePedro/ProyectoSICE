@@ -5,9 +5,7 @@
  */
 package sice.usuario.dao;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
+
 import java.util.ArrayList;
 import java.util.List;
 import sice.conexion.Conexion;
@@ -19,8 +17,7 @@ import sice.usuario.modelo.Usuarios;
  * @author vplei
  */
 public class UsuarioDAO extends Conexion{
-    CallableStatement callableStatement;
-    ResultSet resultSet;
+    
     public UsuarioDAO(){
         super();
     }
@@ -31,7 +28,7 @@ public class UsuarioDAO extends Conexion{
         try{
            conectar();
            String consulta = "CALL USUARIOSCON(?,?,?,?,?,?,?,?,?)";//Para hacer la llamada aL STORE
-
+           
            callableStatement = getConexion().prepareCall(consulta);
            
            callableStatement.setInt("Par_UsuarioID",Integer.parseInt(usuario.getUsuarioID()));
@@ -75,7 +72,7 @@ public class UsuarioDAO extends Conexion{
     
     public MensajeSalida altaUsuario(Usuarios usuario) throws Exception{
         MensajeSalida mensaje= new MensajeSalida();
-        Connection conexion = null;
+
         try{
             conectar();
 
@@ -128,7 +125,7 @@ public class UsuarioDAO extends Conexion{
     
     public MensajeSalida modificaUsuario(Usuarios usuario) throws Exception{
         MensajeSalida mensaje= new MensajeSalida();
-        Connection conexion = null;
+
         try{
             conectar();
 

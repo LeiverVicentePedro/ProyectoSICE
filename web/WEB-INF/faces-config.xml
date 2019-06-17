@@ -9,6 +9,10 @@
             <from-outcome>registroUsuario</from-outcome>
             <to-view-id>/usuarios/registroUsuario.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>registroInstructor</from-outcome>
+            <to-view-id>/usuarios/registroInstructor.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>

@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+        <ui:composition template="./../plantilla/plantilla.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formPrincipal">
+                    <p:panel id="panel" header="Instructores">
+                        <p:separator style="visibility: hidden;"/>          
+                        <p:fieldset legend="Datos Instructor" id="fielsetPrin">
+                            <!--Primer Fila -->
+                            <div id="tabla" class="ui-g">
+                                <div class="ui-g-12">
+                                    <div class="ui-g-1">
+                                        <p:outputLabel for="instructorID"  class="label" value="Instructor: "/>
+                                    </div>
+                                    <div class="ui-g-4" style="text-align: left;">
+                                        <p:autoComplete id="instructorID" value="#{instructoresControlador.instructor.instructorID}" completeMethod="#{instructoresControlador.lista}"
+                                                        var="listaInstructor"  itemValue="#{listaInstructor.instructorID}" itemLabel="#{listaInstructor.instructorID}"
+                                                        size="10" minQueryLength="3">
+                                            <p:column>
+                                                <h:outputText value="#{listaInstructor.instructorID}" />
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="#{listaInstructor.nombreCompleto}"/>
+                                            </p:column>
+                                            <f:ajax event="blur" listener="#{instructoresControlador.consultaInstructores}"  render="datosPersonales botones"/> 
+                                        </p:autoComplete>
+                                     </div>
+                                    <div class="ui-g-2"></div>
+                                        <div class="ui-g-1">
+                                            <p:outputLabel for="usuarioID"  class="label" value="Usuario: "/>
+                                        </div>
+                                        <div class="ui-g-4">
+                                            <p:autoComplete id="usuarioID" value="#{instructoresControlador.usuario.usuarioID}" completeMethod="#{usuarioControlador.lista}"
+                                                            var="listaUsuario"  itemValue="#{listaUsuario.usuarioID}" itemLabel="#{listaUsuario.usuarioID}"
+                                                            size="10" minQueryLength="3">
+                                                 <p:column>
+                                                     <h:outputText value="#{listaUsuario.usuarioID}" />
+                                                 </p:column>
+                                                 <p:column>
+                                                     <h:outputText value="#{listaUsuario.nombreCompleto}"/>
+                                                 </p:column>
+                                                 <f:ajax event="blur" listener="#{instructoresControlador.consultaUsuario}"  render="datosPersonales usuarioID"/> 
+                                            </p:autoComplete>
+                                        </div>
+                                </div>
+                                <!--Termina Primer Fila  -->
+                                <h:panelGroup id="datosPersonales">
+                                <!--Inicia Segunda Fila -->
+                                    <div  class="ui-g-12">
+                                        <div class="ui-g-1">
+                                            <p:outputLabel for="nombre"  class="label" value="Nombre: "/>
+                                        </div>
+                                        <div class="ui-g-4">
+                                            <p:inputText id="nombre" value="#{instructoresControlador.usuario.nombre}" size="50" converter="toUpperCaseConverter">
+                                                <f:ajax event="blur" render="@this"/>
+                                            </p:inputText>
+                                        </div>
+                                        <div class="ui-g-2"></div>
+                                        <div class="ui-g-1">
+                                            <p:outputLabel for="apPaterno"  class="label" value="Primer Apellido: "/>
+                                        </div>
+                                        <div class="ui-g-4">
+                                            <p:inputText id="apPaterno" value="#{instructoresControlador.usuario.primerApellido}"  size="50" converter="toUpperCaseConverter">
+                                                <f:ajax event="blur" render="@this"/>
+                                            </p:inputText>
+                                        </div>
+                                    </div>
+                                    <!--Termina Segunda fila -->
+                                    <!-- Inicia Tercera fila -->
+                                    <div class="ui-g-12" >
+                                        <div class="ui-g-1">
+                                            <p:outputLabel for="apMaterno"  class="label" value="Segundo Apellido: "/>
+                                        </div>
+                                        <div class="ui-g-4">
+                                            <p:inputText id="apMaterno" value="#{instructoresControlador.usuario.segundoApellido}" size="50" converter="toUpperCaseConverter">
+                                                <f:ajax event="blur" render="@this"/>
+                                            </p:inputText>
+                                        </div>
+                                        <div class="ui-g-2"></div>
+                                        <div class="ui-g-1">
+                                            <p:outputLabel for="numControl"  class="label" value="N&uacute;m. Control: "/>
+                                        </div>
+                                        <div class="ui-g-4">
+                                            <p:inputText id="numControl" value="#{instructoresControlador.usuario.numControl}" size="20" converter="toUpperCaseConverter">
+                                                <f:ajax event="blur" render="@this"/>
+                                            </p:inputText>
+                                        </div>
+                                    </div>
+                                    <div class="ui-g-12" >
+                                        <div class="ui-g-1">
+                                            <p:outputLabel for="clave"  class="label" value="Clave Instructor: "/>
+                                        </div>
+                                        <div class="ui-g-4">
+                                            <p:inputText id="clave" value="#{instructoresControlador.instructor.clave}" size="30" converter="toUpperCaseConverter">
+                                                <f:ajax event="blur" render="@this"/>
+                                            </p:inputText>
+                                        </div>
+                                        <div class="ui-g-2"></div>
+                                        <div class="ui-g-1">
+                                            <p:outputLabel for="estatus"  class="label" value="Estatus: "/>
+                                        </div>
+                                        <div class="ui-g-4">
+                                            <p:selectOneMenu id="estatus" value="#{instructoresControlador.instructor.estatus}" autoWidth="true">
+                                                <f:selectItem itemLabel="Seleccione" itemValue="" />
+                                                <f:selectItem itemLabel="Activo" itemValue="A" />
+                                                <f:selectItem itemLabel="Inactivo" itemValue="I" />
+                                            </p:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <!-- Termina Tercera Fila -->
+                                </h:panelGroup>  
+                            </div>
+                        </p:fieldset>
+
+                        <p:separator style="visibility: hidden;"/>
+                        <h:panelGroup id="botones">
+                            <div class="ui-g-12">
+                                <div class="ui-g-8"></div>
+                                <div class="ui-g-2" style="text-align: right">
+                                    <p:commandButton id="agregar"  icon="fas fa-plus" action="#{instructoresControlador.transaccion(1)}" label="Agregar" value="Agregar" disabled="#{instructoresControlador.agregar}"/>
+                                </div>
+                                <div class="ui-g-2" style="text-align: center">
+                                    <p:commandButton id="modificar" icon="fas fa-edit" action="#{instructoresControlador.transaccion(2)}" label="Modificar" value="Modificar" disabled="#{instructoresControlador.modificar}"/>
+                                </div>
+                            </div>
+                            <p:separator style="visibility: hidden;"/>
+                        </h:panelGroup>
+                    </p:panel>
+                </h:form>
+                            
+            </ui:define>
+
+        </ui:composition>
+
+</html>
