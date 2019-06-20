@@ -7,11 +7,16 @@
         <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>registroUsuario</from-outcome>
-            <to-view-id>/usuarios/registroUsuario.xhtml</to-view-id>
+            <to-view-id>/jsf/usuarios/registroUsuario.xhtml</to-view-id>
+            <display-name>registroUsuario</display-name>
         </navigation-case>
         <navigation-case>
             <from-outcome>registroInstructor</from-outcome>
-            <to-view-id>/usuarios/registroInstructor.xhtml</to-view-id>
+            <to-view-id>/jsf/usuarios/registroInstructor.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>registroCurso</from-outcome>
+            <to-view-id>/jsf/cursos/registroCurso.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>

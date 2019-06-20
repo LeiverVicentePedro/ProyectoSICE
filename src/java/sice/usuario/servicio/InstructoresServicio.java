@@ -18,6 +18,7 @@ import sice.usuario.modelo.Instructores;
 public class InstructoresServicio {
     
     InstructoresDAO instructorDAO = new InstructoresDAO();
+    UsuarioServicio usuarioServicio = new UsuarioServicio();
     public interface ope_Tran_Instructor{
         int alta = 1;
         int modifica = 2;
@@ -55,7 +56,8 @@ public class InstructoresServicio {
         try{
             switch(consulta){
                 case ope_Con_Instructor.principal:
-                    instructorCon = instructorDAO.ConsultaInstructor(instructor, consulta); 
+                    instructorCon = instructorDAO.ConsultaInstructor(instructor, consulta);
+                    instructorCon.setUsuarioID(usuarioServicio.consulta(2, instructorCon.getUsuarioID()));
                 break;
             }
         }catch(Exception ex){

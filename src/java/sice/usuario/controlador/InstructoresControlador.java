@@ -30,7 +30,6 @@ import sice.usuario.servicio.UsuarioServicio;
 public class InstructoresControlador implements Serializable{
     
     Instructores instructor = new Instructores();
-    Usuarios usuario = new Usuarios();
     Herramientas herramientas = new Herramientas();
     InstructoresServicio instructoresServicio = new InstructoresServicio();
     UsuarioServicio usuarioServicio = new UsuarioServicio();
@@ -48,12 +47,14 @@ public class InstructoresControlador implements Serializable{
                 instructor.setClaveUsuario(audUsuario.getClave());
                 instructor.setNumeroIP( address.getHostAddress());
                 instructor.setPrograma("Registro.Instructor");
-                instructor.setUsuarioID(usuario);
+                //instructor.setUsuarioID(usuario);
+                System.out.println("Usuario a Guardar "+instructor.getUsuarioID().getUsuarioID());
+                System.out.println("Estatus "+instructor.getEstatus());
                 mensaje = instructoresServicio.transaccion(accion, instructor);
                 if(mensaje.getNumErr()==0){
                     message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito", mensaje.getErrMen()+" "+mensaje.getConsecutivo());
-                    usuario.setUsuarioID(String.valueOf(mensaje.getConsecutivo()));
-
+                    instructor.resetea();
+                    //instructor.setInstructorID(mensaje.getConsecutivo()+"");
                 }else{
                       message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: "+mensaje.getNumErr(), mensaje.getErrMen());
                     }
@@ -78,16 +79,12 @@ public class InstructoresControlador implements Serializable{
     public void consultaInstructores(){       
         try{
            if(herramientas.esNumero(instructor.getInstructorID())==true){ 
-               System.out.println("INSTRUCTORID "+instructor.getInstructorID());
                 if(Integer.parseInt(instructor.getInstructorID())!=0){
                     instructor = instructoresServicio.consulta(1,instructor);
-                    System.out.println("Instructor consultado "+instructor.getUsuarioID().getUsuarioID());
-                    usuario =instructor.getUsuarioID();
-                    consultaUsuario();
                     modificar = false;
                     agregar = true;
                 }else{
-                    instructor.resetea();
+                    //instructor.resetea();
                     agregar = false;
                     modificar = true;
                 }
@@ -101,17 +98,16 @@ public class InstructoresControlador implements Serializable{
         }
     } 
 
-     public void consultaUsuario(){       
+    public void consultaUsuario(){       
         try{
-           if(herramientas.esNumero(usuario.getUsuarioID())==true){ 
-               
-                if(Integer.parseInt(usuario.getUsuarioID())!=0){
-                    usuario = usuarioServicio.consulta(2, usuario);
+           if(herramientas.esNumero(instructor.getUsuarioID().getUsuarioID())==true){ 
+                if(Integer.parseInt(instructor.getUsuarioID().getUsuarioID())!=0){
+                    instructor.setUsuarioID(usuarioServicio.consulta(2,instructor.getUsuarioID()));
                 }else{
-                    usuario.resetea();
+                    instructor.setUsuarioID(null);
                 }
            }else{
-                    usuario.resetea();
+                    instructor.setUsuarioID(null);
            }
         }catch(Exception ex){
             ex.printStackTrace();
@@ -142,14 +138,5 @@ public class InstructoresControlador implements Serializable{
     public void setModificar(boolean modificar) {
         this.modificar = modificar;
     }
-
-    public Usuarios getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuarios usuario) {
-        this.usuario = usuario;
-    }
-    
-    
+       
 }

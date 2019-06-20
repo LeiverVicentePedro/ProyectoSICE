@@ -9,6 +9,7 @@
         <ui:composition template="./plantilla/plantilla.xhtml">
 
             <ui:define name="content">
+                <f:event type="preRenderView" listener="#{accesoControlador.validaPrimerAcceso()}"/>
                 <p:dialog header="Cambio de Contraseña" widgetVar="cambioPass" modal="true" closable="false" resizable="false" width="800">
                     <p:fieldset legend="Nueva Contraseña">
                             <h:form id="formPrincipal">

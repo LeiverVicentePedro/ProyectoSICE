@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../plantilla/plantilla.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formPrincipal">
+                    <p:panel id="panel" header="Cursos">
+                        <p:separator style="visibility: hidden;"/>          
+                        <p:fieldset legend="Datos del Curso" id="fielsetPrin">
+                            <!--Primer Fila -->
+                            <div id="tabla" class="ui-g">
+                                <div class="ui-g-12">
+                                    <div class="ui-g-1">
+                                        <p:outputLabel for="cursoID"  class="label" value="Curso: "/>
+                                    </div>
+                                    <div class="ui-g-4" style="text-align: left;">
+                                        <p:autoComplete id="cursoID" value="#{cursosControlador.curso}" completeMethod="#{cursosControlador.lista}"
+                                                        var="listaCurso"  itemValue="#{listaCurso.cursoID}" itemLabel="#{listaCurso.cursoID}"
+                                                        size="10" minQueryLength="3" converter="instructorConverter">
+                                            <p:column>
+                                                <h:outputText value="#{listaCurso.cursoID}" />
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="#{listaCurso.nombre}"/>
+                                            </p:column>
+                                            <p:ajax event="blur" listener="#{cursosControlador.consulta}"  update="panel"/>
+                                        </p:autoComplete>
+                                     </div>
+                                    <div class="ui-g-7"></div>
+                                        
+                                </div>
+                                <!--Termina Primer Fila  -->
+                                
+                                <!--Inicia Segunda Fila -->
+                                    <div  class="ui-g-12">
+                                        <div class="ui-g-1">
+                                            <p:outputLabel for="nombre"  class="label" value="Nombre Curso: "/>
+                                        </div>
+                                        <div class="ui-g-4">
+                                            <p:inputText id="nombre" value="#{cursosControlador.curso.nombre}" size="50" converter="toUpperCaseConverter">
+                                                <f:ajax event="blur" render="@this"/>
+                                            </p:inputText>
+                                        </div>
+                                        <div class="ui-g-2"></div>
+                                        <div class="ui-g-1">
+                                            <p:outputLabel for="clave"  class="label" value="Clave Curso: "/>
+                                        </div>
+                                        <div class="ui-g-4">
+                                            <p:inputText id="clave" value="#{cursosControlador.curso.clave}"  size="50" converter="toUpperCaseConverter">
+                                                <f:ajax event="blur" render="@this"/>
+                                            </p:inputText>
+                                        </div>
+                                    </div>
+                                    <!--Termina Segunda fila -->
+                                    <!-- Inicia Tercera fila -->
+                                    <div class="ui-g-12" >
+                                        <div class="ui-g-1">
+                                            <p:outputLabel for="estatus"  class="label" value="Estatus: "/>
+                                        </div>
+                                        <div class="ui-g-4">
+                                            <p:selectOneMenu id="estatus" value="#{cursosControlador.curso.estatus}" autoWidth="true" >
+                                                <f:selectItem itemLabel="Seleccione" itemValue="" />
+                                                <f:selectItem itemLabel="Activo" itemValue="A" />
+                                                <f:selectItem itemLabel="Inactivo" itemValue="I" />
+                                                <p:ajax event="change" update="@this"/>
+                                            </p:selectOneMenu>
+                                        </div>
+                                        <div class="ui-g-7"></div>
+                                    </div>
+                                    <!-- Termina Tercera Fila -->
+                                  
+                            </div>
+                        </p:fieldset>
+
+                        <p:separator style="visibility: hidden;"/>
+                        <h:panelGroup id="botones">
+                            <div class="ui-g-12">
+                                <div class="ui-g-8"></div>
+                                <div class="ui-g-2" style="text-align: right">
+                                    <p:commandButton id="agregar"  icon="fas fa-plus" actionListener="#{cursosControlador.transaccion(1)}" label="Agregar" value="Agregar" disabled="#{cursosControlador.agregar}" update="panel" process="@this"/>
+                                </div>
+                                <div class="ui-g-2" style="text-align: center">
+                                    <p:commandButton id="modificar" icon="fas fa-edit" actionListener="#{cursosControlador.transaccion(2)}" label="Modificar" value="Modificar" disabled="#{cursosControlador.modificar}" update="panel" process="@this"/>
+                                </div>
+                            </div>
+                            <p:separator style="visibility: hidden;"/>
+                        </h:panelGroup>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

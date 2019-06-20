@@ -165,7 +165,7 @@ public class Usuarios extends AuditoriasBean implements Serializable{
 
     
     public void resetea(){
-        usuarioID = null;
+        //usuarioID = null;
         nombre  = null;
         primerApellido= null;
         segundoApellido= null;

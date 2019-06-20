@@ -14,10 +14,8 @@ import javax.sql.DataSource;
 public class Conexion {
     @Resource(mappedName="jdbc/sice_pool")
     private DataSource dataSource = null;
-    
     private Connection conexion;
     private InitialContext context;
-    
     public CallableStatement callableStatement;
     public ResultSet resultSet;
     

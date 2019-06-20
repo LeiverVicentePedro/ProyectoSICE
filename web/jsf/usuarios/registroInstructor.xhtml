@@ -6,7 +6,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-        <ui:composition template="./../plantilla/plantilla.xhtml">
+        <ui:composition template="./../../plantilla/plantilla.xhtml">
 
             <ui:define name="content">
                 <h:form id="formPrincipal">
@@ -20,16 +20,16 @@
                                         <p:outputLabel for="instructorID"  class="label" value="Instructor: "/>
                                     </div>
                                     <div class="ui-g-4" style="text-align: left;">
-                                        <p:autoComplete id="instructorID" value="#{instructoresControlador.instructor.instructorID}" completeMethod="#{instructoresControlador.lista}"
+                                        <p:autoComplete id="instructorID" value="#{instructoresControlador.instructor}" completeMethod="#{instructoresControlador.lista}"
                                                         var="listaInstructor"  itemValue="#{listaInstructor.instructorID}" itemLabel="#{listaInstructor.instructorID}"
-                                                        size="10" minQueryLength="3">
+                                                        size="10" minQueryLength="3" converter="instructorConverter">
                                             <p:column>
                                                 <h:outputText value="#{listaInstructor.instructorID}" />
                                             </p:column>
                                             <p:column>
                                                 <h:outputText value="#{listaInstructor.nombreCompleto}"/>
                                             </p:column>
-                                            <f:ajax event="blur" listener="#{instructoresControlador.consultaInstructores}"  render="datosPersonales botones"/> 
+                                            <f:ajax event="blur" listener="#{instructoresControlador.consultaInstructores}"  render="panel"/>
                                         </p:autoComplete>
                                      </div>
                                     <div class="ui-g-2"></div>
@@ -37,16 +37,17 @@
                                             <p:outputLabel for="usuarioID"  class="label" value="Usuario: "/>
                                         </div>
                                         <div class="ui-g-4">
-                                            <p:autoComplete id="usuarioID" value="#{instructoresControlador.usuario.usuarioID}" completeMethod="#{usuarioControlador.lista}"
+                                            <p:autoComplete id="usuarioID" value="#{instructoresControlador.instructor.usuarioID}" completeMethod="#{usuarioControlador.lista}"
                                                             var="listaUsuario"  itemValue="#{listaUsuario.usuarioID}" itemLabel="#{listaUsuario.usuarioID}"
-                                                            size="10" minQueryLength="3">
+                                                            size="10" minQueryLength="3" converter="usuarioConverter" forceSelection="true">
                                                  <p:column>
                                                      <h:outputText value="#{listaUsuario.usuarioID}" />
                                                  </p:column>
                                                  <p:column>
                                                      <h:outputText value="#{listaUsuario.nombreCompleto}"/>
                                                  </p:column>
-                                                 <f:ajax event="blur" listener="#{instructoresControlador.consultaUsuario}"  render="datosPersonales usuarioID"/> 
+                                                 <f:ajax event="blur" listener="#{instructoresControlador.consultaUsuario}"  render="panel" /> 
+                                                
                                             </p:autoComplete>
                                         </div>
                                 </div>
@@ -58,7 +59,7 @@
                                             <p:outputLabel for="nombre"  class="label" value="Nombre: "/>
                                         </div>
                                         <div class="ui-g-4">
-                                            <p:inputText id="nombre" value="#{instructoresControlador.usuario.nombre}" size="50" converter="toUpperCaseConverter">
+                                            <p:inputText id="nombre" value="#{instructoresControlador.instructor.usuarioID.nombre}" size="50" converter="toUpperCaseConverter">
                                                 <f:ajax event="blur" render="@this"/>
                                             </p:inputText>
                                         </div>
@@ -67,7 +68,7 @@
                                             <p:outputLabel for="apPaterno"  class="label" value="Primer Apellido: "/>
                                         </div>
                                         <div class="ui-g-4">
-                                            <p:inputText id="apPaterno" value="#{instructoresControlador.usuario.primerApellido}"  size="50" converter="toUpperCaseConverter">
+                                            <p:inputText id="apPaterno" value="#{instructoresControlador.instructor.usuarioID.primerApellido}"  size="50" converter="toUpperCaseConverter">
                                                 <f:ajax event="blur" render="@this"/>
                                             </p:inputText>
                                         </div>
@@ -79,7 +80,7 @@
                                             <p:outputLabel for="apMaterno"  class="label" value="Segundo Apellido: "/>
                                         </div>
                                         <div class="ui-g-4">
-                                            <p:inputText id="apMaterno" value="#{instructoresControlador.usuario.segundoApellido}" size="50" converter="toUpperCaseConverter">
+                                            <p:inputText id="apMaterno" value="#{instructoresControlador.instructor.usuarioID.segundoApellido}" size="50" converter="toUpperCaseConverter">
                                                 <f:ajax event="blur" render="@this"/>
                                             </p:inputText>
                                         </div>
@@ -88,7 +89,7 @@
                                             <p:outputLabel for="numControl"  class="label" value="N&uacute;m. Control: "/>
                                         </div>
                                         <div class="ui-g-4">
-                                            <p:inputText id="numControl" value="#{instructoresControlador.usuario.numControl}" size="20" converter="toUpperCaseConverter">
+                                            <p:inputText id="numControl" value="#{instructoresControlador.instructor.usuarioID.numControl}" size="20" converter="toUpperCaseConverter">
                                                 <f:ajax event="blur" render="@this"/>
                                             </p:inputText>
                                         </div>
@@ -107,10 +108,11 @@
                                             <p:outputLabel for="estatus"  class="label" value="Estatus: "/>
                                         </div>
                                         <div class="ui-g-4">
-                                            <p:selectOneMenu id="estatus" value="#{instructoresControlador.instructor.estatus}" autoWidth="true">
+                                            <p:selectOneMenu id="estatus" value="#{instructoresControlador.instructor.estatus}" autoWidth="true" >
                                                 <f:selectItem itemLabel="Seleccione" itemValue="" />
                                                 <f:selectItem itemLabel="Activo" itemValue="A" />
                                                 <f:selectItem itemLabel="Inactivo" itemValue="I" />
+                                                <p:ajax event="change" update="@this"/>
                                             </p:selectOneMenu>
                                         </div>
                                     </div>
@@ -124,10 +126,10 @@
                             <div class="ui-g-12">
                                 <div class="ui-g-8"></div>
                                 <div class="ui-g-2" style="text-align: right">
-                                    <p:commandButton id="agregar"  icon="fas fa-plus" action="#{instructoresControlador.transaccion(1)}" label="Agregar" value="Agregar" disabled="#{instructoresControlador.agregar}"/>
+                                    <p:commandButton id="agregar"  icon="fas fa-plus" actionListener="#{instructoresControlador.transaccion(1)}" label="Agregar" value="Agregar" disabled="#{instructoresControlador.agregar}" update="panel" process="@this"/>
                                 </div>
                                 <div class="ui-g-2" style="text-align: center">
-                                    <p:commandButton id="modificar" icon="fas fa-edit" action="#{instructoresControlador.transaccion(2)}" label="Modificar" value="Modificar" disabled="#{instructoresControlador.modificar}"/>
+                                    <p:commandButton id="modificar" icon="fas fa-edit" actionListener="#{instructoresControlador.transaccion(2)}" label="Modificar" value="Modificar" disabled="#{instructoresControlador.modificar}" update="panel" process="@this"/>
                                 </div>
                             </div>
                             <p:separator style="visibility: hidden;"/>

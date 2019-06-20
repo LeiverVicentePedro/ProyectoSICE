@@ -50,8 +50,7 @@ public class UsuarioControlador implements Serializable{
         mensaje = usuarioServicio.transaccion(usuario, accion);
         if(mensaje.getNumErr()==0){
           message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito", mensaje.getErrMen()+" "+mensaje.getConsecutivo());
-           //PrimeFaces.current().resetInputs("form:panel");
-          usuario.setUsuarioID(String.valueOf(mensaje.getConsecutivo()));
+          usuario.resetea();
          
         }else{
             message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: "+mensaje.getNumErr(), mensaje.getErrMen());

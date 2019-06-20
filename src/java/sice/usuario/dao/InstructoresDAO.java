@@ -109,13 +109,15 @@ public class InstructoresDAO extends Conexion{
             conectar();
 
             String alta = "CALL INSTRUCTORESMOD(?,?,?,?,?,"
-                                         + "?,?,?,?,?);";
+                                         + "?,?,?,?,?,?);";
             getConexion().setAutoCommit(false);
+            System.out.println("Estatus en DAO "+instructor.getEstatus());
             callableStatement = getConexion().prepareCall(alta);
             callableStatement.setInt("Par_InstructorID", Integer.parseInt(instructor.getInstructorID()));
-            callableStatement.setInt("Par_UsuarioID",Integer.parseInt(instructor.getUsuarioID().getUsuarioID()));
             callableStatement.setString("Par_Clave",instructor.getClave());
-
+            callableStatement.setInt("Par_UsuarioID",Integer.parseInt(instructor.getUsuarioID().getUsuarioID()));
+            callableStatement.setString("Par_Estatus",instructor.getEstatus());
+            
             callableStatement.setString("Par_Salida","S");
             callableStatement.registerOutParameter("Par_NumErr",java.sql.Types.INTEGER);
             callableStatement.registerOutParameter("Par_ErrMen",java.sql.Types.VARCHAR);

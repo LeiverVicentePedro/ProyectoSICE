@@ -74,7 +74,7 @@ public class AccesoControlador implements Serializable{
             ex.printStackTrace();
         }
     }
-    @PostConstruct
+    
     public void validaPrimerAcceso(){
         try{
              FacesContext contexto = FacesContext.getCurrentInstance();
@@ -115,8 +115,9 @@ public class AccesoControlador implements Serializable{
          
         }else{
             message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: "+mensaje.getNumErr(), mensaje.getErrMen());
+            PrimeFaces.current().dialog().showMessageDynamic(message);
         }
-        PrimeFaces.current().dialog().showMessageDynamic(message);
+        
         
         }catch(Exception ex){
             ex.printStackTrace();
